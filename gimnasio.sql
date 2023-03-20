@@ -39,11 +39,22 @@ CREATE TABLE clase(
 );
 
 CREATE TABLE asiste(
+    id_asiste int primary key auto_increment,
   id_clase int,
     id_user int,
     clasificacion float,
+    activo boolean,
     CONSTRAINT FOREIGN KEY fk_tipoClase_asiste (id_clase) REFERENCES tipoClase(id_clase),
     CONSTRAINT FOREIGN KEY fk_user_asiste (id_user) REFERENCES usuario(id_user)   
+);
+
+CREATE TABLE acude(
+    id_acude int primary key auto_increment,
+    id_user int,
+    id_evento int,
+    activo boolean,
+    CONSTRAINT FOREIGN KEY fk_user_acude(id_user) REFERENCES usuario(id_user),
+    CONSTRAINT FOREIGN KEY fk_evento_acude(id_evento) REFERENCES evento(id_evento) 
 );
 
 CREATE TABLE evento(
