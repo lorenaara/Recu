@@ -9,7 +9,7 @@ class AsisteDao extends FactoryBD implements DAO{
         $devuelve=parent::ejecuta($sql, $datos);
         $arrayAsiste=array();
         while($obj=$devuelve->fetchObject()){
-            $asiste=new Asiste($obj->id_user, $obj->id_claseC, $obj->clasificacion,$obj->activo);
+            $asiste=new Asiste($obj->id_asiste,$obj->id_user, $obj->id_claseC, $obj->clasificacion,$obj->activo);
             array_push($arrayAsiste, $asiste);
         }
         return $arrayAsiste;
@@ -22,7 +22,7 @@ class AsisteDao extends FactoryBD implements DAO{
         $devuelve =parent::ejecuta($sql,$datos);
         $obj= $devuelve->fetchObject();
         if($obj){
-            $asiste=new Asiste($obj->id_user, $obj->id_claseC, $obj->clasificacion, $obj->activo);
+            $asiste=new Asiste($obj->id_asiste,$obj->id_user, $obj->id_claseC, $obj->clasificacion, $obj->activo);
             return $asiste;
         }
         return null;
@@ -54,7 +54,7 @@ class AsisteDao extends FactoryBD implements DAO{
     public static function update($objeto)
     {
         $sql= 'update asiste set id_user=?, id_claseC=?, clasificacion=?, activo=?, where id_asiste=?';
-        $datos= array($objeto->id_user, $objeto->id_claseC, $objeto->clasificacion,$objeto->activo);
+        $datos= array($objeto->id_asiste,$objeto->id_user, $objeto->id_claseC, $objeto->clasificacion,$objeto->activo);
         $devuelve=parent::ejecuta($sql, $datos);
         if($devuelve->rowCount()==0){
             return false;
@@ -68,7 +68,7 @@ class AsisteDao extends FactoryBD implements DAO{
         $devuelve=parent::ejecuta($sql,$datos);
         $obj=$devuelve->fetchObject();
         if($obj){
-            $asiste=new Asiste($obj->id_user, $obj->id_claseC, $obj->clasificacion,$obj->activo);
+            $asiste=new Asiste($obj->id_asiste,$obj->id_user, $obj->id_claseC, $obj->clasificacion,$obj->activo);
             return $asiste;
         }
         return null;
@@ -80,7 +80,7 @@ class AsisteDao extends FactoryBD implements DAO{
         $devuelve=parent::ejecuta($sql,$datos);
         $obj=$devuelve->fetchObject();
         if($obj){
-            $asiste=new Asiste($obj->id_user, $obj->id_claseC, $obj->clasificacion,$obj->activo);
+            $asiste=new Asiste($obj->id_asiste,$obj->id_user, $obj->id_claseC, $obj->clasificacion,$obj->activo);
             return $asiste;
         }
         return null;
