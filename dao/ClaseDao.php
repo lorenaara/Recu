@@ -56,7 +56,7 @@ class ClaseDao extends FactoryBD implements DAO{
     public static function update($objeto)
     {
         $sql= 'update clase set activo=?, sala=?, f_inicio=?, f_fin=?, plazas=?, plazas_ocupadas=?, id_clase=?, id_user=?, where id_claseC=?';
-        $datos=array($objeto->id_claseC, $objeto->activo, $objeto->sala, $objeto->f_inicio, $objeto->f_fin, $objeto->plazas, $objeto->plazas_ocupadas, $objeto->id_clase, $objeto->id_user);
+        $datos=array($objeto->activo, $objeto->sala, $objeto->f_inicio, $objeto->f_fin, $objeto->plazas, $objeto->plazas_ocupadas, $objeto->id_clase, $objeto->id_user,$objeto->id_claseC);
         $devuelve=parent::ejecuta($sql, $datos);
         if($devuelve->rowCount()==0){
             return false;

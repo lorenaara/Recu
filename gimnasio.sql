@@ -1,4 +1,4 @@
-CREATE DATABASE gimnasio;
+CREATE DATABASE gimnasio;  
 USE gimnasio;
 
 CREATE TABLE usuario(
@@ -82,10 +82,13 @@ CREATE TABLE rutina(
 );
 
 CREATE TABLE contiene(
+    id_contiene int primary key auto_increment,
     repetir int,
     kg float,
+    activo boolean,
     id_rutina int,
     id_ejercicio int,
+    activo boolean,
     CONSTRAINT FOREIGN KEY fk_rutina_contiene (id_rutina) REFERENCES rutina(id_rutina),
     CONSTRAINT FOREIGN KEY fk_ejercicio_contiene (id_ejercicio) REFERENCES ejercicio(id_ejercicio)
 );

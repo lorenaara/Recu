@@ -57,7 +57,7 @@ class TipoClaseDao extends FactoryBD implements DAO{
     public static function update($objeto)
     {
         $sql='update tipoClase set nombre=?, descripcion=?, activo=?, where id_clase=?';
-        $datos= array($objeto->id_clase, $objeto->nombre, $objeto->id_descripcion, $objeto->activo);
+        $datos= array($objeto->nombre, $objeto->id_descripcion, $objeto->activo, $objeto->id_clase);
         $devuelve=parent::ejecuta($sql, $datos);
         if($devuelve->rowCount()==0){
             return false;

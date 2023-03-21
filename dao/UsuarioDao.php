@@ -57,8 +57,8 @@ class UsuarioDao extends FactoryBD implements DAO {
 
     public static function update($objeto)
     {
-        $sql= 'update usuario set clave=?, f_nacimiento=?, email=?,id_rol=?, where id_user=?';
-        $datos= array($objeto->id_user,$objeto->activo ,$objeto->nombre, $objeto->clave,$objeto->f_nacimiento, $objeto->email, $objeto->id_rol);
+        $sql= 'update usuario set activo=?, clave=?, f_nacimiento=?, email=?, id_rol=?, where id_user=?';
+        $datos= array($objeto->activo, $objeto->clave, $objeto->f_nacimiento, $objeto->email, $objeto->id_rol, $objeto->id_user);
         $devuelve=parent::ejecuta($sql, $datos);
         if($devuelve->rowCount()==0){
             return false;

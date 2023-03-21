@@ -55,7 +55,7 @@ class AcudeDao extends FactoryBD implements DAO{
     public static function update($objeto)
     {
         $sql='update acude set id_user=?, id_evento=?, activo=?, where id_acude=?';
-        $datos= array($objeto->id_acude, $objeto->id_user, $objeto->id_evento, $objeto->activo);
+        $datos= array($objeto->id_user, $objeto->id_evento, $objeto->activo, $objeto->id_acude);
          $devuelve=parent::ejecuta($sql, $datos);
         if($devuelve->rowCount()==0){
             return false;

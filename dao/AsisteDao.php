@@ -54,7 +54,7 @@ class AsisteDao extends FactoryBD implements DAO{
     public static function update($objeto)
     {
         $sql= 'update asiste set id_user=?, id_claseC=?, clasificacion=?, activo=?, where id_asiste=?';
-        $datos= array($objeto->id_asiste,$objeto->id_user, $objeto->id_claseC, $objeto->clasificacion,$objeto->activo);
+        $datos= array($objeto->id_user, $objeto->id_claseC, $objeto->clasificacion,$objeto->activo, $objeto->id_asiste);
         $devuelve=parent::ejecuta($sql, $datos);
         if($devuelve->rowCount()==0){
             return false;
