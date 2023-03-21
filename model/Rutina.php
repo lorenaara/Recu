@@ -1,5 +1,5 @@
 <?
-
+ 
 class Rutina{
     private $id_rutina;
     private $activo;
