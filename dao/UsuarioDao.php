@@ -78,5 +78,9 @@ class UsuarioDao extends FactoryBD implements DAO {
         }
         return null;
     }
+
+    public static function findByRol($id_rol){
+        
+    }
 }
 ?>
