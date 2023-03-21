@@ -1,6 +1,6 @@
 <?
 
-class RutinaDao extends FactoryDAO implements DAO{
+class RutinaDao extends FactoryBD implements DAO{
 
     public static function findAll(){
         $sql='select * from rutina';
