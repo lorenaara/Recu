@@ -1,6 +1,6 @@
 <?
 
-class controladorPadre{
+class ControladorPadre{
 
     //comprobacion del recurso
     public static function recurso(){
