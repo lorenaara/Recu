@@ -80,7 +80,15 @@ class UsuarioDao extends FactoryBD implements DAO {
     }
 
     public static function findByRol($id_rol){
-        
+        $sql='select * from usuario where id_rol=?';
+        $datos= array($id_rol);
+        $devuelve=parent::ejecuta($sql, $datos);
+        $obj=$devuelve->fetchObject();
+        if($obj){
+            $usuario= new Usuario($obj->id_user, $obj->activo, $obj->nombre, $obj->clave, $obj->f_nacimiento, $obj->email, $obj->id_rol);
+            return $usuario;
+        }
+        return null;
     }
 }
 ?>
