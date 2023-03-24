@@ -48,7 +48,7 @@ class UsuarioController extends ControladorPadre{
         }
         if(count($recurso)==3){
             $usuario = UsuarioDao::findById($recurso[2]);
-            $data = json_encode($concierto);
+            $data = json_encode($usuario);
             self::respuesta(
                 $data,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -94,7 +94,7 @@ class UsuarioController extends ControladorPadre{
         }else{
             self::respuesta(
                 '',
-                array('HTTP/1.1 400 El recurso esta mal formado conciertos/id')
+                array('HTTP/1.1 400 El recurso esta mal formado Usuario/id')
             );
         }
     }
@@ -116,7 +116,7 @@ class UsuarioController extends ControladorPadre{
         }else{
             self::respuesta(
                 '',
-                array('HTTP/1.1 400 El recurso esta mal formado conciertos/id')
+                array('HTTP/1.1 400 El recurso esta mal formado Usuario/id')
             );
         }
     }
