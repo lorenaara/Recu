@@ -45,7 +45,7 @@ class TipoClaseController extends ControladorPadre{
         $body= file_get_contents('php://input');
         $dato=json_decode($body, true);
         if(isset($dato['nombre']) && isset($_GET['descripcion']) && $_GET['activo']){
-            $clase=new TipoClase($dato['nombre'], $dato['descripcion'], $dato['activo']);
+            $clase=new TipoClase(null,$dato['nombre'], $dato['descripcion'], $dato['activo']);
             if(TipoClaseDao::insert($clase)){
                 self::respuesta(
                     '',

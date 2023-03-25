@@ -1,7 +1,6 @@
-<?
+<?php
 
-class UsuarioController extends ControladorPadre{
-
+class ClaseController extends ControladorPadre{
     public function controlar(){
         $metodo = $_SERVER['REQUEST_METHOD'];
         switch ($metodo) {
@@ -24,22 +23,21 @@ class UsuarioController extends ControladorPadre{
     }
 
     public function buscar(){
-        $parametro =$this->parametros();
-
+        $parametro=$this->parametros();
         $recurso=self::recurso();
         if(count($recurso)==2){
             if(!$parametro){
-                $lista=UsuarioDao::findAll();
+                $lista=ClaseDao::findAll();
                 $data =json_encode($lista);
                 self::respuesta($data,  array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
             }else{
-                if(isset($_GET['nombre']) && isset($_GET['clave']) && count($_GET)==2){
-                    $usuario=UsuarioDao::findByUserPass($_GET['nombre'], $_GET['clave']);
-                    $data=json_encode($usuario);
+                if(isset($_GET['id_clase']) &&count($_GET)==2){
+                    $clase= ClaseDao::findByClase($_GET['id_clase']);
+                    $data=json_encode($clase);
                     self::respuesta($data,  array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
-                }elseif(isset($_GET['id_rol']) && count($_GET)==2){
-                    $usuario=UsuarioDao::findByRol($_GET['id_rol']);
-                    $data=json_encode($usuario);
+                }elseif(isset($_GET['id_user']) && count($_GET)==2){
+                    $clase=ClaseDao::findByUser($_GET['id_user']);
+                    $data=json_encode($clase);
                     self::respuesta($data,  array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
                 }
             }
@@ -47,22 +45,21 @@ class UsuarioController extends ControladorPadre{
             self::respuesta('',  array('HTTP/1.1 400 No se ha utilizado un filtro correcto'));
         }
         if(count($recurso)==3){
-            $usuario = UsuarioDao::findById($recurso[2]);
-            $data = json_encode($usuario);
+            $clase=ClaseDao:: findById($recurso[2]);
+            $data = json_encode($clase);
             self::respuesta(
                 $data,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
         }
-
     }
 
     public function insertar(){
         $body= file_get_contents('php://input');
         $dato=json_decode($body, true);
-        if(isset($dato['activo']) && isset($dato['nombre']) && isset($dato['clave']) && isset($dato['f_nacimiento']) && isset($dato['email']) && isset($dato['id_rol'])){
-            $usuario = new Usuario(null,$dato['activo'], $dato['nombre'], $dato['clave'], $dato['f_nacimiento'], $dato['email'], $dato['id_rol']);
-            if(UsuarioDao::insert($usuario)){
+        if(isset($dato['activo']) && isset($dato['sala']) && isset($dato['f_inicio']) && isset($dato['f_fin']) && isset($dato['plazas']) && isset($dato['plazas_ocupadas']) && isset($dato['id_clase']) && isset($dato['id_user'])){
+            $clase= new Clase(null, $dato['activo'], $dato['sala'], $dato['f_inicio'], $dato['f_fin'], $dato['plazas'], $dato['plazas_ocupadas'], $dato['id_clase'], $dato['id_user']);
+            if(ClaseDao::insert($clase)){
                 self::respuesta(
                     '',
                     array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -81,10 +78,10 @@ class UsuarioController extends ControladorPadre{
         $body= file_get_contents('php://input');
         $dato=json_decode($body, true);
         if(count($recurso)==3){
-            if(isset($dato['activo']) && isset($dato['nombre']) && isset($dato['clave']) && isset($dato['f_nacimiento']) && isset($dato['email']) && isset($dato['id_rol'])){
-                $usuario = new Usuario(null,$dato['activo'], $dato['nombre'], $dato['clave'], $dato['f_nacimiento'], $dato['email'], $dato['id_rol']);
-                $usuario->id=$recurso[2];
-                if(UsuarioDao::update($usuario)){
+            if(isset($dato['activo']) && isset($dato['sala']) && isset($dato['f_inicio']) && isset($dato['f_fin']) && isset($dato['plazas']) && isset($dato['plazas_ocupadas']) && isset($dato['id_clase']) && isset($dato['id_user'])){
+                $clase= new Clase(null, $dato['activo'], $dato['sala'], $dato['f_inicio'], $dato['f_fin'], $dato['plazas'], $dato['plazas_ocupadas'], $dato['id_clase'], $dato['id_user']);
+                $clase->id=$recurso[2];
+                if(ClaseDao::update($clase)){
                     self::respuesta(
                         '',
                         array('Content-Type: application/json', 'HTTP/1.1 201 Modificado')
@@ -94,7 +91,7 @@ class UsuarioController extends ControladorPadre{
         }else{
             self::respuesta(
                 '',
-                array('HTTP/1.1 400 El recurso esta mal formado Usuario/id')
+                array('HTTP/1.1 400 El recurso esta mal formado Clase/id')
             );
         }
     }
@@ -102,7 +99,7 @@ class UsuarioController extends ControladorPadre{
     public function borrar(){
         $recurso=self::recurso();
         if(count($recurso)==3){
-            if(UsuarioDao::delete($recurso[2])){
+            if(ClaseDao::delete($recurso[2])){
                 self::respuesta(
                     '',
                     array('Content-Type: application/json', 'HTTP/1.1 204 Borrado')
@@ -120,6 +117,4 @@ class UsuarioController extends ControladorPadre{
             );
         }
     }
-
-
 }

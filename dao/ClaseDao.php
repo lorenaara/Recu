@@ -63,4 +63,28 @@ class ClaseDao extends FactoryBD implements DAO{
         }
         return true;
     }
+
+    public function findByClase($id_clase){
+        $sql= 'select * from clase where id_clase=?';
+        $datos=array($id_clase);
+        $devuelve =parent::ejecuta($sql,$datos);
+        $obj= $devuelve->fetchObject();
+        if($obj){
+            $clase= new Clase($obj->id_claseC, $obj->activo, $obj->sala, $obj->f_inicio, $obj->f_fin, $obj->plazas, $obj->plazas_ocupadas, $obj->id_clase, $obj->id_user);
+            return $clase;
+        }
+        return null;
+    }
+
+    public function findByUser($id_user){
+        $sql= 'select * from clase where id_user=?';
+        $datos=array($id_user);
+        $devuelve =parent::ejecuta($sql,$datos);
+        $obj= $devuelve->fetchObject();
+        if($obj){
+            $clase= new Clase($obj->id_claseC, $obj->activo, $obj->sala, $obj->f_inicio, $obj->f_fin, $obj->plazas, $obj->plazas_ocupadas, $obj->id_clase, $obj->id_user);
+            return $clase;
+        }
+        return null;
+    }
 }
