@@ -10,7 +10,7 @@ class EventoDao extends FactoryBD implements DAO{
         $arrayEvento=array();
         while($obj=$devuelve->fetchObject()){
             $evento= new Evento($obj->id_evento, $obj->f_inicio, $obj->f_fin, $obj->plazas, $obj->plazas_ocupadas, $obj->nombre, $obj->descripcion, $obj->activo, $obj->id_user);
-            array_push($arrayEvento, $evento)
+            array_push($arrayEvento, $evento);
         }
         return $arrayEvento;
     }
