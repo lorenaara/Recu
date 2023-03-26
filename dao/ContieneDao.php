@@ -18,10 +18,10 @@ class ContieneDao extends FactoryBD implements DAO{
         $sql='select * from contiene where id_contiene=?';
         $datos=array($id);
         $devuelve=parent::ejecuta($sql, $datos);
-        $obj=$devuelve->fetchObject()
+        $obj=$devuelve->fetchObject();
         if($obj){
             $contiene= new Contiene ($obj->id_contiene, $obj->repetir, $obj->activo, $obj->id_rutina, $obj->id_ejercicio);
-            return $contiene,
+            return $contiene;
         }
         return null;
     }
@@ -65,10 +65,10 @@ class ContieneDao extends FactoryBD implements DAO{
         $sql='select * from contiene where id_rutina=?';
         $datos=array($id_rutina);
         $devuelve=parent::ejecuta($sql, $datos);
-        $obj=$devuelve->fetchObject()
+        $obj=$devuelve->fetchObject();
         if($obj){
             $contiene= new Contiene ($obj->id_contiene, $obj->repetir, $obj->activo, $obj->id_rutina, $obj->id_ejercicio);
-            return $contiene,
+            return $contiene;
         }
         return null;
     }
@@ -77,10 +77,10 @@ class ContieneDao extends FactoryBD implements DAO{
         $sql='select * from contiene where id_ejercicio=?';
         $datos=array($id_ejercicio);
         $devuelve=parent::ejecuta($sql, $datos);
-        $obj=$devuelve->fetchObject()
+        $obj=$devuelve->fetchObject();
         if($obj){
             $contiene= new Contiene ($obj->id_contiene, $obj->repetir, $obj->activo, $obj->id_rutina, $obj->id_ejercicio);
-            return $contiene,
+            return $contiene;
         }
         return null;
     }

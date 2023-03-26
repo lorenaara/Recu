@@ -113,7 +113,7 @@ class EventoController extends ControladorPadre{
             }else{
                 self::respuesta(
                     '',
-                    array('HTTP/1.1 400 El recurso esta mal formado Usuario/id')
+                    array('HTTP/1.1 400 El recurso esta mal formado Evento/id')
                 );
             }
         }

@@ -88,7 +88,6 @@ CREATE TABLE contiene(
     activo boolean,
     id_rutina int,
     id_ejercicio int,
-    activo boolean,
     CONSTRAINT FOREIGN KEY fk_rutina_contiene (id_rutina) REFERENCES rutina(id_rutina),
     CONSTRAINT FOREIGN KEY fk_ejercicio_contiene (id_ejercicio) REFERENCES ejercicio(id_ejercicio)
 );

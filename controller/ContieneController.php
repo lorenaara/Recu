@@ -1,10 +1,9 @@
 <?php
 
-class AsisteController extends ControladorPadre{
+class ContieneRutina extends ControladorPadre{
     public function controlar(){
         $metodo = $_SERVER['REQUEST_METHOD'];
         switch ($metodo) {
-            
             case 'GET':
                 $this->buscar();
                 break;
@@ -28,17 +27,17 @@ class AsisteController extends ControladorPadre{
         $recurso=self::recurso();
         if(count($recurso)==2){
             if(!$parametro){
-                $lista=AsisteDao::findAll();
+                $lista=ContieneDao::findAll();
                 $data =json_encode($lista);
                 self::respuesta($data,  array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
             }else{
                 if(isset($_GET['id_clase']) &&count($_GET)==2){
-                    $asiste= AsisteDao::findByClase($_GET['id_clase']);
-                    $data=json_encode($asiste);
+                    $contiene= ContieneDao::findByRutina($_GET['id_rutina']);
+                    $data=json_encode($contiene);
                     self::respuesta($data,  array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
-                }elseif(isset($_GET['id_user']) && count($_GET)==2){
-                    $asiste=AsisteDao::findByUser($_GET['id_user']);
-                    $data=json_encode($asiste);
+                }elseif(isset($_GET['id_ejercicio']) && count($_GET)==2){
+                    $contiene=ContieneDao::findByEjercicio($_GET['id_ejercicio']);
+                    $data=json_encode($contiene);
                     self::respuesta($data,  array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
                 }
             }
@@ -46,8 +45,8 @@ class AsisteController extends ControladorPadre{
             self::respuesta('',  array('HTTP/1.1 400 No se ha utilizado un filtro correcto'));
         }
         if(count($recurso)==3){
-            $asiste=AsisteDao:: findById($recurso[2]);
-            $data = json_encode($asiste);
+            $contiene=ContieneDao:: findById($recurso[2]);
+            $data = json_encode($contiene);
             self::respuesta(
                 $data,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -58,9 +57,9 @@ class AsisteController extends ControladorPadre{
     public function insertar(){
         $body= file_get_contents('php://input');
         $dato=json_decode($body, true);
-        if(isset($dato['id_user'])&& isset($dato['id_claseC'])&& isset($dato['clasificacion'])&&isset($dato['activo'])){
-            $asiste=new Asiste(null, $dato['id_user'], $dato['id_claseC'], $dato['clasificacion'], $dato['activo']);
-            if(AsisteDao::insert($asiste)){
+        if(isset($dato['repetir']) && isset($dato['kg']) && isset($dato['activo']) && isset($dato['id_rutina']) && isset($dato['id_ejercicio'])){
+            $contiene= new Contiene(null, $dato['repetir'], $dato['kg'], $dato['activo'], $dato['id_rutina'], $dato['id_ejercicio']);
+            if(ContieneDao::insert($contiene)){
                 self::respuesta(
                     '',
                     array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -79,43 +78,43 @@ class AsisteController extends ControladorPadre{
         $body= file_get_contents('php://input');
         $dato=json_decode($body, true);
         if(count($recurso)==3){
-            if(isset($dato['id_user'])&& isset($dato['id_claseC'])&& isset($dato['clasificacion'])&&isset($dato['activo'])){
-                $asiste=new Asiste(null, $dato['id_user'], $dato['id_claseC'], $dato['clasificacion'], $dato['activo']);
-                $asiste->id=$recurso[2];
-                if(AsisteDao::update($asiste)){
+            if(isset($dato['repetir']) && isset($dato['kg']) && isset($dato['activo']) && isset($dato['id_rutina']) && isset($dato['id_ejercicio'])){
+                $contiene= new Contiene(null, $dato['repetir'], $dato['kg'], $dato['activo'], $dato['id_rutina'], $dato['id_ejercicio']);
+                $contiene->id=$recurso[2];
+                if(ContieneDao::update($contiene)){
                     self::respuesta(
                         '',
                         array('Content-Type: application/json', 'HTTP/1.1 201 Modificado')
                     );
                 }
-        }
-    }else{
-        self::respuesta(
-            '',
-            array('HTTP/1.1 400 El recurso esta mal formado Asiste/id')
-        );
-    }
-}
-
-public function borrar(){
-    $recurso=self::recurso();
-    if(count($recurso)==3){
-        if(AsisteDao::delete($recurso[2])){
-            self::respuesta(
-                '',
-                array('Content-Type: application/json', 'HTTP/1.1 204 Borrado')
-            ); 
+            }
         }else{
             self::respuesta(
                 '',
-                array('Content-Type: application/json', 'HTTP/1.1 204 No se ha borrado ninguno')               
-             );
+                array('HTTP/1.1 400 El recurso esta mal formado Contiene/id')
+            );
         }
-    }else{
-        self::respuesta(
-            '',
-            array('HTTP/1.1 400 El recurso esta mal formado Usuario/id')
-        );
     }
-}
+
+    public function borrar(){
+        $recurso=self::recurso();
+        if(count($recurso)==3){
+            if(ContieneDao::delete($recurso[2])){
+                self::respuesta(
+                    '',
+                    array('Content-Type: application/json', 'HTTP/1.1 204 Borrado')
+                ); 
+            }else{
+                self::respuesta(
+                    '',
+                    array('Content-Type: application/json', 'HTTP/1.1 204 No se ha borrado ninguno')               
+                 );
+            }
+        }else{
+            self::respuesta(
+                '',
+                array('HTTP/1.1 400 El recurso esta mal formado Contiene/id')
+            );
+        }
+    }
 }

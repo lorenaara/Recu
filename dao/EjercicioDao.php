@@ -18,7 +18,7 @@ class EjercicioDao extends FactoryBD implements DAO{
         $sql='select * from ejercicio where id_ejercicio=?';
         $datos=array($id);
         $devuelve=parent::ejecuta($sql, $datos);
-        $obj=$devuelve->fetchObject()
+        $obj=$devuelve->fetchObject();
         if($obj){
              $ejercicio= new Ejercicio ($obj->id_ejercicio, $obj->activo, $obj->video); 
              return $ejercicio;
