@@ -1,5 +1,5 @@
 <? 
-require './cofig/configuracion';
+require './config/configuracion.php';
 
 $recursos = controladorPadre::recurso();
 

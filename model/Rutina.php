@@ -5,14 +5,14 @@ class Rutina{
     private $activo;
     private $descripcion;
     private $nombre;
-    private $f_inicio,
+    private $f_inicio;
     private $f_fin;
     private $id_user;
 
     public function __construct($id_rutina, $activo, $descripcion, $nombre, $f_inicio, $f_fin, $id_user){
         $this->id_rutina=$id_rutina;
         $this->activo=$activo;
-        $this->descripcion=$descripcion,
+        $this->descripcion=$descripcion;
         $this->nombre=$nombre;
         $this->f_inicio=$f_inicio;
         $this->f_fin=$f_fin;

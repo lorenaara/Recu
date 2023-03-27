@@ -1,6 +1,10 @@
 CREATE DATABASE gimnasio;  
 USE gimnasio;
 
+CREATE TABLE rol(
+    id_rol int primary key auto_increment,
+    tipo varchar(10) not null
+);
 CREATE TABLE usuario(
     id_user int primary key auto_increment,
     activo boolean not null,
@@ -12,10 +16,6 @@ CREATE TABLE usuario(
     CONSTRAINT FOREIGN KEY fk_usario_rol (id_rol) REFERENCES rol(id_rol)
 );
 
-CREATE TABLE rol(
-    id_rol int primary key auto_increment,
-    tipo varchar(10) not null
-);
 
 CREATE TABLE tipoClase(
     id_clase int primary key auto_increment,
@@ -48,15 +48,6 @@ CREATE TABLE asiste(
     CONSTRAINT FOREIGN KEY fk_user_asiste (id_user) REFERENCES usuario(id_user)   
 );
 
-CREATE TABLE acude(
-    id_acude int primary key auto_increment,
-    id_user int,
-    id_evento int,
-    activo boolean,
-    CONSTRAINT FOREIGN KEY fk_user_acude(id_user) REFERENCES usuario(id_user),
-    CONSTRAINT FOREIGN KEY fk_evento_acude(id_evento) REFERENCES evento(id_evento) 
-);
-
 CREATE TABLE evento(
     id_evento int primary key auto_increment,
     f_inicio datetime,
@@ -69,6 +60,15 @@ CREATE TABLE evento(
     id_user int,
     CONSTRAINT FOREIGN KEY fk_user_evento (id_user) REFERENCES usuario(id_user)   
 );
+CREATE TABLE acude(
+    id_acude int primary key auto_increment,
+    id_user int,
+    id_evento int,
+    activo boolean,
+    CONSTRAINT FOREIGN KEY fk_user_acude(id_user) REFERENCES usuario(id_user),
+    CONSTRAINT FOREIGN KEY fk_evento_acude(id_evento) REFERENCES evento(id_evento) 
+);
+
 
 CREATE TABLE rutina(
     id_rutina int primary key auto_increment,
@@ -80,7 +80,11 @@ CREATE TABLE rutina(
     id_user int,
     CONSTRAINT FOREIGN KEY fk_user_rutina (id_user) REFERENCES usuario(id_user)   
 );
-
+CREATE TABLE ejercicio(
+    id_ejercicio int primary key auto_increment,
+    activo boolean,
+    video varchar(50)
+);
 CREATE TABLE contiene(
     id_contiene int primary key auto_increment,
     repetir int,
@@ -92,8 +96,4 @@ CREATE TABLE contiene(
     CONSTRAINT FOREIGN KEY fk_ejercicio_contiene (id_ejercicio) REFERENCES ejercicio(id_ejercicio)
 );
 
-CREATE TABLE ejercicio(
-    id_ejercicio int primary key auto_increment,
-    activo boolean,
-    video varchar(50)
-);
+

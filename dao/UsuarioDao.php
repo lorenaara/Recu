@@ -9,7 +9,7 @@ class UsuarioDao extends FactoryBD implements DAO {
         $devuelve=parent::ejecuta($sql, $datos);
         $arrayUsuarios=array();
         while($obj= $devuelve->fetchObject()){
-            $usuario= new Usuario($obj->id_user, $obj->activo, $obj->nombre, $obj->clave, $obj->f_nacimiento, $obj->email, $obj->id_rol);
+            $usuario=array("idUser" => ($obj->id_user), $obj->activo, $obj->nombre, $obj->clave, $obj->f_nacimiento, $obj->email, $obj->id_rol);
             array_push($arrayUsuarios, $usuario);
         }
         return $arrayUsuarios;
@@ -42,7 +42,7 @@ class UsuarioDao extends FactoryBD implements DAO {
 
     public static function insert($objeto)
     {
-        $sql= 'insert into usuario values(null,?,?,?,?,?,?)';
+        $sql= 'insert into usuario values(?,?,?,?,?,?,?)';
         $objeto=(array)$objeto;
         $datos=array();
         foreach($objeto as $att){
