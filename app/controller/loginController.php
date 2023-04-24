@@ -25,6 +25,9 @@ if(isset($_REQUEST['registro'])){
             $_SESSION['id_rol']=$usuario->id_rol;
             
            //controlador y vista de la pagina usuario
+           $_SESSION['controller']=$controller['home'];
+           $_SESSION['vista']=$vistas['home'];
+           header('Location:./index.php');
            }else{
             $_SESSION['error']='Error! Usuario o Contraseña incorrecto';
            }

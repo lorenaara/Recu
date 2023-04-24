@@ -38,6 +38,18 @@ if (isset($_SESSION['error'])) {
     unset($_SESSION['error']);
 }
 
-//si existe la variable evento pinta
-//
+foreach ($evento as $objetoEvento) {?>
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><? echo $objetoEvento->nombre ?></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><b>Plazas: </b><? echo $objetoEvento->plazas ?></h6>
+    <p class="card-text"><? echo $objetoEvento->descripcion?></p>
+    <p class="card-text"><b>Fecha inicio</b> <? echo $objetoEvento->f_inicio?></p>
+    <p class="card-text"><b>Fecha fin</b> <? echo $objetoEvento->f_fin?></p>
+  </div>
+  <?
+}
 ?>
+
+
+</div>
