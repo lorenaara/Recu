@@ -3,12 +3,12 @@
 class ContieneDao extends FactoryBD implements DAO{
 
     public static function findAll(){
-        $sql='select * from contiene';
+        $sql='select * from contiene join rutina using(id_rutina)';
         $datos=array();
         $devuelve=parent::ejecuta($sql, $datos);
         $arrayContiene=array();
          while($obj=$devuelve->fetchObject()){
-            $contiene=array("id_contiene"=>($obj->id_contiene), "repetir"=>($obj->repetir), "kg"=>($obj->kg), "activo"=>($obj->activo), "id_rutina"=>($obj->id_rutina), "id_ejercicio"=>($obj->id_ejercicio));
+            $contiene=array("id_contiene"=>($obj->id_contiene), "repetir"=>($obj->repetir), "kg"=>($obj->kg), "activo"=>($obj->activo), "id_rutina"=>($obj->id_rutina), "id_ejercicio"=>($obj->id_ejercicio), "nombre"=>($obj->nombre));
             array_push($arrayContiene, $contiene);
          }
          return $arrayContiene;

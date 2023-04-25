@@ -4,12 +4,12 @@ class ClaseDao extends FactoryBD implements DAO{
 
     public static function findAll()
     {
-        $sql='select * from clase';
+        $sql='select * from clase join tipoClase using(id_clase)';
         $datos=array();
         $devuelve =parent::ejecuta($sql,$datos);
         $arrayClase= array();
         while($obj=$devuelve->fetchObject()){
-            $clase= array("id_claseC"=>($obj->id_claseC), "activo"=>($obj->activo), "sala"=>($obj->sala), "f_inicio"=>($obj->f_inicio), "f_fin"=>( $obj->f_fin), "plazas"=>($obj->plazas), "plazas_ocupadas"=>($obj->plazas_ocupadas), "id_clase"=>($obj->id_clase), "id_user"=>($obj->id_user));
+            $clase= array("id_claseC"=>($obj->id_claseC), "activo"=>($obj->activo), "sala"=>($obj->sala), "f_inicio"=>($obj->f_inicio), "f_fin"=>( $obj->f_fin), "plazas"=>($obj->plazas), "plazas_ocupadas"=>($obj->plazas_ocupadas), "id_clase"=>($obj->id_clase), "id_user"=>($obj->id_user), "nombre"=>($obj->nombre));
             array_push($arrayClase, $clase);
         }
         return $arrayClase;
@@ -17,12 +17,12 @@ class ClaseDao extends FactoryBD implements DAO{
 
     public static function findById($id)
     {
-        $sql= 'select * from clase where id_claseC=?';
+        $sql= 'select * from clase join tipoClase using(id_clase) where id_claseC=? ';
         $datos=array($id);
         $devuelve =parent::ejecuta($sql,$datos);
         $obj= $devuelve->fetchObject();
         if($obj){
-            $clase= array("id_claseC"=>($obj->id_claseC), "activo"=>($obj->activo), "sala"=>($obj->sala), "f_inicio"=>($obj->f_inicio), "f_fin"=>( $obj->f_fin), "plazas"=>($obj->plazas), "plazas_ocupadas"=>($obj->plazas_ocupadas), "id_clase"=>($obj->id_clase), "id_user"=>($obj->id_user));
+            $clase= array("id_claseC"=>($obj->id_claseC), "activo"=>($obj->activo), "sala"=>($obj->sala), "f_inicio"=>($obj->f_inicio), "f_fin"=>( $obj->f_fin), "plazas"=>($obj->plazas), "plazas_ocupadas"=>($obj->plazas_ocupadas), "id_clase"=>($obj->id_clase), "id_user"=>($obj->id_user), "nombre"=>($obj->nombre));
             return $clase;
         }
         return null;
@@ -72,7 +72,7 @@ class ClaseDao extends FactoryBD implements DAO{
         return null;
     }
 
-    public function findByUse($id_user){
+    public function findByUser($id_user){
         $sql= 'select * from clase where id_user=?';
         $datos=array($id_user);
         $devuelve =parent::ejecuta($sql,$datos);

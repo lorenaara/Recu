@@ -3,29 +3,38 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Sala</th>
+      <th scope="col">Fecha Inicio</th>
+      <th scope="col">Fecha Fin</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
+    <?
+    if (isset($_SESSION['error'])) {
+      echo $_SESSION['error'];
+      unset($_SESSION['error']);
+    }
+    foreach ($clase as $objetoClase) {
+    ?>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td><? echo $objetoClase->nombre ?></td>
+      <td><? echo $objetoClase->sala?></td>
+      <td><? echo $objetoClase->f_inicio?></td>
+      <td><? echo $objetoClase->f_fin?></td>
+      <td><form action="./index.php">
+      <input type="hidden" name="id_claseC" value="<?echo $objetoClase->id_claseC?>">
+      <button name="modClase">modificar</button>
+      </form>
+    </td>
+
+     
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    <?
+    }
+    ?>
+    
   </tbody>
 </table>
+<p>¿Desea añadir uno nuevo?<button name="anadirClase">Añadir</button></p>

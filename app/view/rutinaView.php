@@ -1,5 +1,3 @@
-
-
 <table class="table table-hover">
   <thead>
     <tr>
@@ -16,13 +14,13 @@
       echo $_SESSION['error'];
       unset($_SESSION['error']);
     }
-    foreach ($evento as $objetoEvento) {
+    foreach ($rutina as $objetoRutina) {
     ?>
     <tr>
-      <td><? echo $objetoEvento->nombre ?></td>
-      <td><? echo $objetoEvento->descripcion?></td>
-      <td><? echo $objetoEvento->f_inicio?></td>
-      <td><? echo $objetoEvento->f_fin?></td>
+      <td><? echo $objetoRutina->nombre ?></td>
+      <td><? echo $objetoRutina->descripcion?></td>
+      <td><? echo $objetoRutina->f_inicio?></td>
+      <td><? echo $objetoRutina->f_fin?></td>
       <td><button name="modificar">modificar</button></td>
      
     </tr>
