@@ -28,7 +28,7 @@ if (isset($_SESSION['error'])) {
       <td><input type="datetime" name="f_inicio"  value="<? echo $clase->f_inicio?>"></td>
       <td><input type="datetime" name="f_fin"  value="<? echo $clase->f_fin?>"></td>
       <td><input type="number" name="plazas"  value="<? echo $clase->plazas?>"></td>
-      <td><input type="submit" name="enviar"  value="Enviar"></td>
+      <td><input type="submit" name="enviarM"  value="Enviar"></td>
     </tr>
     
    

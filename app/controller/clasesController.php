@@ -5,7 +5,7 @@ if(isset($_REQUEST['modClase'])){
     $_SESSION['vista']=$vistas['modClase'];
     $clase = Curl::getid('clase',($_REQUEST['id_claseC']));
     $clase= json_decode($clase);
-    if(isset($_REQUEST['enviar'])){
+}elseif(isset($_REQUEST['enviarM'])){
     $arrayClase= array(
         'id_claseC'=>$_REQUEST['id_claseC'],
         'activo'=>1,
@@ -16,8 +16,10 @@ if(isset($_REQUEST['modClase'])){
         'id_clase'=>$clase->id_clase,
         'id_user'=>$clase->id_user
     );
+    //getid
+    //mod
     $claseMod=Curl::put('clase', $arrayClase, $_REQUEST['id_claseC']);
-    }
+    
 }elseif(isset($_REQUEST['anadirClase'])){
     $clase=Curl::get('tipoClase');
     $clase=json_decode($clase);
