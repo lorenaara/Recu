@@ -40,6 +40,7 @@ class ClaseController extends ControladorPadre{
                     $data=json_encode($clase);
                     self::respuesta($data,  array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
                 }
+                
             }
         }else if(count($recurso)==3){
             $clase=ClaseDao:: findById($recurso[2]);

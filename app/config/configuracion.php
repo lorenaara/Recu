@@ -20,5 +20,6 @@ $vistas =array(
     'evento'=>'eventosView.php',
     'rutina'=>'rutinaView.php',
     'ejercicio'=>'ejercicioView.php',
-    'modClase'=> 'modClase.php'
+    'modClase'=> 'modClase.php',
+    'anadirClase'=>'anadirClase.php'
 );

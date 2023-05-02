@@ -46,6 +46,19 @@ class Curl
         return $resultado;
     }
 
+    
+    public static function getMonitor($recurso)
+    {
+        $ch = curl_init();
+        $url = URLAPI . $recurso . '?id_rol=4';
+        curl_setopt($ch, CURLOPT_URL, $url);
+        //que retorne algo
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $resultado = curl_exec($ch);
+        curl_close($ch);
+        return $resultado;
+    }
+
     public static function post($recurso, $array){
         $ch = curl_init();
         $url = URLAPI . $recurso;

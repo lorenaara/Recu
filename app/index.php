@@ -37,9 +37,6 @@ if(!isset($_SESSION['vista'])){
     }elseif(isset($_REQUEST['ejercicio'])){
         $_SESSION['controller']=$controller['ejercicio'];
         $_SESSION['vista']=$vistas['ejercicio'];
-    }elseif(isset($_REQUEST['modClase'])){
-        $_SESSION['controller']=$controller['clase'];
-        $_SESSION['vista']=$vistas['modClase'];
     }
 }
 require $_SESSION['controller'];

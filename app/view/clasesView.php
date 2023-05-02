@@ -37,4 +37,4 @@
     
   </tbody>
 </table>
-<p>¿Desea añadir uno nuevo?<button name="anadirClase">Añadir</button></p>
+<p>¿Desea añadir uno nuevo?</p><form action="./index.php" method="post"><input type="submit" name="anadirClase" value="Añadir"></form>

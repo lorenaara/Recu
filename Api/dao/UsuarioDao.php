@@ -81,12 +81,12 @@ class UsuarioDao extends FactoryBD implements DAO {
         $sql='select * from usuario where id_rol=?';
         $datos= array($id_rol);
         $devuelve=parent::ejecuta($sql, $datos);
-        $obj=$devuelve->fetchObject();
-        if($obj){
+        $arrayUsuarios=array();
+        while($obj= $devuelve->fetchObject()){
             $usuario=array("idUser" => ($obj->id_user), "activo"=>($obj->activo), "nombre"=>($obj->nombre), "clave"=>( $obj->clave), "f_nacimiento"=>($obj->f_nacimiento), "email"=>($obj->email), "id_rol"=>($obj->id_rol));
-            return $usuario;
+            array_push($arrayUsuarios, $usuario);
         }
-        return null;
+        return $arrayUsuarios;
     }
 }
 ?>
